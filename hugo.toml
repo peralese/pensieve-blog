@@ -1,0 +1,6 @@
+baseURL = "https://pensieve.peraleslab.com/"
+locale = 'en-us'
+title   = "Digital Pensieve"
+theme = "PaperMod"
+
+
