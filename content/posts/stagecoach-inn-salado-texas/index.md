@@ -4,6 +4,7 @@ date = '2026-07-08T16:25:29-05:00'
 draft = false
 categories = ['Travel']
 tags = ['Salado', 'Texas']
+coverImage = 'IMG_5328.jpeg'
 +++
 
 {{< gallery >}}
