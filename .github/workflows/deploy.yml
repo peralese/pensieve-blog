@@ -10,8 +10,8 @@ permissions:
   contents: read
 
 env:
-  S3_BUCKET: pensieve.peraleslab.com
-  CLOUDFRONT_DISTRIBUTION_ID: DIST_ID
+  S3_BUCKET: pensieve.peraleslab.com-936453552758-us-east-1-an
+  CLOUDFRONT_DISTRIBUTION_ID: E2MKYBV1TVIL97
   AWS_REGION: us-east-1
 
 jobs:
@@ -43,7 +43,7 @@ jobs:
       - name: Configure AWS credentials (OIDC)
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: arn:aws:iam::ACCOUNT_ID:role/github-actions-blog-deploy
+          role-to-assume: arn:aws:iam::936453552758:role/github-actions-blog-deploy
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Sync to S3
