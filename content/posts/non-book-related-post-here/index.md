@@ -3,6 +3,7 @@ title = 'Non Book Related Post Here'
 date = '2024-12-20T02:38:00.001Z'
 draft = false
 aliases = ['/2024/12/non-book-related-post-here.html']
+tags = ['Certification']
 +++
 
 ![Non Book Related Post Here](images.png)

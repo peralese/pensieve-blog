@@ -1,0 +1,67 @@
+{{- $mainPages := where site.RegularPages "Type" "in" site.Params.mainSections }}
+{{- $reviews := where site.RegularPages "Params.categories" "intersect" (slice "Reviews") }}
+{{- $recentReviews := first 3 (sort $reviews "Date" "desc") }}
+
+<aside class="mag-sidebar">
+
+  <section class="mag-widget mag-widget--about">
+    <h3 class="mag-widget-title">About Digital Pensieve</h3>
+    <div class="mag-avatar" aria-hidden="true">DP</div>
+    <p>{{ site.Params.description }}</p>
+    <a class="mag-widget-link" href="{{ "about/" | relURL }}">Learn more about this site →</a>
+  </section>
+
+  {{- with site.Taxonomies.tags.ByCount }}
+  <section class="mag-widget mag-widget--topics">
+    <h3 class="mag-widget-title">Browse Topics</h3>
+    <ul class="mag-topic-list">
+      {{- range . }}
+      <li>
+        <a href="{{ .Page.RelPermalink }}">
+          <span>{{ .Page.Title }}</span><span class="mag-topic-count">{{ .Count }}</span>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+  {{- with $recentReviews }}
+  <section class="mag-widget mag-widget--recent">
+    <h3 class="mag-widget-title">Recent Reviews</h3>
+    <ul class="mag-recent-list">
+      {{- range . }}
+      {{- $img := index (.Resources.ByType "image" | first 1) 0 }}
+      <li>
+        <a href="{{ .RelPermalink }}">
+          <span class="mag-recent-thumb">
+            {{- $title := .Title }}
+            {{- with $img }}<img src="{{ .RelPermalink }}" alt="{{ $title }}" loading="lazy">
+            {{- else }}<span class="mag-recent-thumb-fallback"></span>{{- end }}
+          </span>
+          <span class="mag-recent-info">
+            <span class="mag-recent-title">{{ .Title }}</span>
+            <span class="mag-recent-date">{{ .Date.Format "Jan 2, 2006" }}</span>
+          </span>
+        </a>
+      </li>
+      {{- end }}
+    </ul>
+  </section>
+  {{- end }}
+
+  {{- with $mainPages }}
+  <section class="mag-widget mag-widget--archive">
+    <h3 class="mag-widget-title">Archive</h3>
+    <ul class="mag-archive-list">
+      {{- $years := slice }}
+      {{- range .GroupByDate "2006" }}{{ $years = $years | append (dict "year" .Key "count" (len .Pages)) }}{{- end }}
+      {{- range $years }}
+      <li><a href="{{ "archive/" | relURL }}#{{ .year }}">{{ .year }}</a> <span class="mag-topic-count">{{ .count }}</span></li>
+      {{- end }}
+    </ul>
+    <a class="mag-widget-link" href="{{ "archive/" | relURL }}">View full archive →</a>
+  </section>
+  {{- end }}
+
+</aside>

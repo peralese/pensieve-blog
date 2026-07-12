@@ -3,6 +3,7 @@ title = 'So Apparently I Have Been Blogging'
 date = '2024-09-21T17:44:00.003Z'
 draft = false
 aliases = ['/2024/09/so-apparently-i-have-been-blogging.html']
+tags = ['Personal']
 +++
 
 So apparently, I have been blogging since 2010 per my profile on this

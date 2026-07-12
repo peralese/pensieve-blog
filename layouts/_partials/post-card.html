@@ -1,0 +1,36 @@
+{{- /*
+  Renders one post as a magazine card. Params:
+    page    - the page to render
+    variant - "hero" (large, with CTA button) or "card" (compact grid item)
+*/ -}}
+{{- $page := .page }}
+{{- $variant := .variant | default "card" }}
+{{- $badgeMap := dict "Reviews" "Book Review" "Recipes" "Recipe" "Gardening" "Gardening" "Travel" "Travel" }}
+{{- $ctaMap := dict "Reviews" "Read the Review" "Recipes" "Read the Recipe" "Gardening" "Read More" "Travel" "Read More" }}
+{{- $category := "" }}
+{{- with $page.Params.categories }}{{ $category = index . 0 }}{{ end }}
+{{- $badge := index $badgeMap $category | default "Essay" }}
+{{- $cta := index $ctaMap $category | default "Read the Post" }}
+{{- $image := $page.Resources.ByType "image" | first 1 }}
+
+<article class="mag-card mag-card--{{ $variant }}">
+  <a class="mag-card-thumb" href="{{ $page.RelPermalink }}" aria-hidden="true" tabindex="-1">
+    {{- with (index $image 0) }}
+    <img src="{{ .RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
+    {{- else }}
+    <span class="mag-card-thumb-fallback" aria-hidden="true">{{ substr $page.Title 0 1 }}</span>
+    {{- end }}
+  </a>
+  <div class="mag-card-body">
+    {{- if eq $variant "hero" }}<span class="mag-badge mag-badge--featured">Featured</span>{{- end }}
+    <span class="mag-badge">{{ $badge }}</span>
+    <h2 class="mag-card-title"><a href="{{ $page.RelPermalink }}">{{ $page.Title }}</a></h2>
+    <div class="mag-card-meta">{{- partial "post_meta.html" $page -}}</div>
+    {{- if ne ($page.Param "hideSummary") true }}
+    <p class="mag-card-excerpt">{{ $page.Summary | plainify | htmlUnescape }}{{ if $page.Truncated }}…{{ end }}</p>
+    {{- end }}
+    {{- if eq $variant "hero" }}
+    <a class="mag-cta" href="{{ $page.RelPermalink }}">{{ $cta }} →</a>
+    {{- end }}
+  </div>
+</article>

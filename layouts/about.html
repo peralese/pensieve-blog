@@ -1,0 +1,24 @@
+{{- define "main" }}
+
+<article class="post-single about-page">
+  <header class="post-header about-header">
+    {{- with .Resources.GetMatch "avatar*" }}
+    {{- $thumb := .Fill "240x240 Center" }}
+    <img class="about-avatar" src="{{ $thumb.RelPermalink }}" alt="{{ $.Title }}">
+    {{- end }}
+    <div class="about-header-text">
+      <h1 class="post-title">{{ .Title }}</h1>
+      {{- with .Params.memberSince }}
+      <p class="about-meta">Blogging since {{ . }}</p>
+      {{- end }}
+    </div>
+  </header>
+
+  <div class="post-content md-content about-content">
+    {{- if not (.Param "disableAnchoredHeadings") }}
+    {{- partial "anchored_headings.html" .Content -}}
+    {{- else }}{{ .Content }}{{ end }}
+  </div>
+</article>
+
+{{- end }}{{/* end main */}}
