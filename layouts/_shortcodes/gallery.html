@@ -1,0 +1,55 @@
+{{- /*
+  Photo gallery for posts with several images in their page bundle
+  (travel, gardening, etc): a large main image followed by a row of
+  smaller thumbnails for the rest. Click any of them to open the
+  full-resolution original in a new tab.
+
+  Usage:
+    {{< gallery >}}                          all images in the bundle;
+                                              honors front-matter `cover`
+                                              as the main image if set,
+                                              otherwise the first one found
+    {{< gallery "a.jpg" "b.jpg" "c.jpg" >}}   just these, in this order —
+                                              "a.jpg" becomes the main image
+*/ -}}
+{{- $page := .Page }}
+{{- $images := slice }}
+{{- if .Params }}
+  {{- range .Params }}
+    {{- with $page.Resources.GetMatch . }}
+      {{- $images = $images | append . }}
+    {{- end }}
+  {{- end }}
+{{- else }}
+  {{- $all := $page.Resources.ByType "image" }}
+  {{- $coverRes := "" }}
+  {{- with $page.Params.coverImage }}{{ with $page.Resources.GetMatch . }}{{ $coverRes = . }}{{ end }}{{ end }}
+  {{- if $coverRes }}
+    {{- $images = $images | append $coverRes }}
+    {{- range $all }}
+      {{- if ne .RelPermalink $coverRes.RelPermalink }}{{ $images = $images | append . }}{{ end }}
+    {{- end }}
+  {{- else }}
+    {{- $images = $all }}
+  {{- end }}
+{{- end }}
+
+{{- with $images }}
+{{- $main := index . 0 }}
+{{- $rest := after 1 . }}
+<div class="gallery">
+  <a class="gallery-main" href="{{ $main.RelPermalink }}" target="_blank" rel="noopener" aria-label="Open full-size image">
+    <img src="{{ ($main.Fill "1200x800 Center").RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
+  </a>
+  {{- with $rest }}
+  <div class="gallery-grid">
+    {{- range . }}
+    {{- $thumb := .Fill "300x225 Center" }}
+    <a class="gallery-item" href="{{ .RelPermalink }}" target="_blank" rel="noopener" aria-label="Open full-size image">
+      <img src="{{ $thumb.RelPermalink }}" alt="{{ $page.Title }}" loading="lazy">
+    </a>
+    {{- end }}
+  </div>
+  {{- end }}
+</div>
+{{- end }}

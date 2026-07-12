@@ -11,7 +11,13 @@
 {{- with $page.Params.categories }}{{ $category = index . 0 }}{{ end }}
 {{- $badge := index $badgeMap $category | default "Essay" }}
 {{- $cta := index $ctaMap $category | default "Read the Post" }}
-{{- $image := $page.Resources.ByType "image" | first 1 }}
+{{- $image := slice }}
+{{- with $page.Params.coverImage }}
+  {{- with $page.Resources.GetMatch . }}{{ $image = slice . }}{{ end }}
+{{- end }}
+{{- if not $image }}
+  {{- $image = $page.Resources.ByType "image" | first 1 }}
+{{- end }}
 
 <article class="mag-card mag-card--{{ $variant }}">
   <a class="mag-card-thumb" href="{{ $page.RelPermalink }}" aria-hidden="true" tabindex="-1">
