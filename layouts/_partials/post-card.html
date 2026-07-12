@@ -5,8 +5,8 @@
 */ -}}
 {{- $page := .page }}
 {{- $variant := .variant | default "card" }}
-{{- $badgeMap := dict "Reviews" "Book Review" "Recipes" "Recipe" "Gardening" "Gardening" "Travel" "Travel" }}
-{{- $ctaMap := dict "Reviews" "Read the Review" "Recipes" "Read the Recipe" "Gardening" "Read More" "Travel" "Read More" }}
+{{- $badgeMap := dict "Reviews" "Book Review" "Recipes" "Recipe" "Gardening" "Gardening" "Travel" "Travel" "Interests" "Interests" }}
+{{- $ctaMap := dict "Reviews" "Read the Review" "Recipes" "Read the Recipe" "Gardening" "Read More" "Travel" "Read More" "Interests" "Read More" }}
 {{- $category := "" }}
 {{- with $page.Params.categories }}{{ $category = index . 0 }}{{ end }}
 {{- $badge := index $badgeMap $category | default "Essay" }}
