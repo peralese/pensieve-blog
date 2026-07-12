@@ -6,7 +6,14 @@
 
   <section class="mag-widget mag-widget--about">
     <h3 class="mag-widget-title">About Digital Pensieve</h3>
-    <div class="mag-avatar" aria-hidden="true">DP</div>
+    {{- with site.GetPage "/about" }}
+    {{- with .Resources.GetMatch "avatar*" }}
+    {{- $thumb := .Fill "96x96 Center" }}
+    <img class="mag-avatar" src="{{ $thumb.RelPermalink }}" alt="Erick">
+    {{- end }}
+    {{- else }}
+    <div class="mag-avatar mag-avatar--fallback" aria-hidden="true">DP</div>
+    {{- end }}
     <p>{{ site.Params.description }}</p>
     <a class="mag-widget-link" href="{{ "about/" | relURL }}">Learn more about this site →</a>
   </section>

@@ -276,6 +276,12 @@ body {
     width: 48px;
     height: 48px;
     border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.mag-avatar--fallback {
     background: var(--mag-navy);
     color: var(--mag-cream-text);
     font-family: var(--mag-serif);
@@ -283,7 +289,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 10px;
 }
 
 .mag-widget--about p {
