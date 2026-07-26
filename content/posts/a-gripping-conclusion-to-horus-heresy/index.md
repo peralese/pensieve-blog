@@ -1,5 +1,5 @@
 +++
-title = 'A Gripping Conclusion to the Horus Heresy Series'
+title = 'A Gripping Conclusion to One of the Shattered Legions Story Arcs'
 date = '2026-02-23T05:00:44.703Z'
 draft = false
 aliases = ['/2026/02/a-gripping-conclusion-to-horus-heresy.html', '/reviews/a-gripping-conclusion-to-horus-heresy/']
@@ -7,7 +7,7 @@ categories = ['Reviews']
 tags = ['Warhammer 40k', 'Sci-Fi']
 +++
 
-![A Gripping Conclusion to the Horus Heresy Series](91_vgIePigL._SL1500_.jpg)
+![A Gripping Conclusion to One of the Shattered Legions Story Arcs](91_vgIePigL._SL1500_.jpg)
 
 ## TL;DR
 
