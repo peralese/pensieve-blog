@@ -1,0 +1,6 @@
+{{- $categories := .Page.Params.categories | default (slice) -}}
+{{- $isReview := in $categories "Reviews" -}}
+<img src="{{ .Destination | safeURL }}"
+  {{- with .PlainText }} alt="{{ . }}"{{ end -}}
+  {{- with .Title }} title="{{ . }}"{{ end -}}
+  {{- if $isReview }} class="review-cover"{{ end -}}>
