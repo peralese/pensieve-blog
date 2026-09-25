@@ -1,7 +1,7 @@
 +++
 title = "Logan's Run"
 date = "2026-09-25T17:25:32-05:00"
-draft = true
+draft = false
 categories = ["Reviews"]
 tags = ["Sci-Fi", "Books", "Movies"]
 coverImage = "logans-run.jpg"
