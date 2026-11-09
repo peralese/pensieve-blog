@@ -41,6 +41,14 @@ separate sections:
 Each post is a Hugo **page bundle** — a folder (`content/posts/<slug>/index.md`) with any
 images living right alongside it, so `![alt](photo.jpg)` in the body just works with no path.
 
+### Inbox workflow
+
+Place source text and images for a new post in `input/` (the inbox). Once the post
+has been created and its text and image copies verified, delete the source files
+used for that post. Leave unrelated files in the inbox, and preserve all source
+files if creation or verification fails. Cleanup does not require a commit or
+deployment first.
+
 ### Front matter reference
 
 ```toml
